@@ -1,49 +1,49 @@
-const Task = require('../models/Loan'); 
-const getTasks = async (req, res) =>
+const Loan = require('../models/Loan'); 
+const getLoans = async (req, res) =>
      { 
         try { 
-            const tasks = await Task.find({ userId: req.user.id }); 
-            res.json(tasks); 
+            const loans = await Loan.find({ loanId: req.loanId.id }); 
+            res.json(loans); 
         } catch (error) 
         { 
             res.status(500).json({ message: error.message });
         }
     }
-    const addTask = async (req, res) => 
+    const addLoan = async (req, res) => 
         { 
             const { title, description, deadline } = req.body; 
             try { 
-                const task = await Task.create({ userId: req.user.id, title, description, deadline });
-                 res.status(201).json(task);
+                const loan = await Loan.create({ userId: req.user.id, title, description, deadline });
+                 res.status(201).json(loan);
                  } 
                  catch (error) { 
                     res.status(500).json({ message: error.message }); 
                 } 
         };
 
-        const updateTask = async (req, res) => 
+        const updateLoan = async (req, res) => 
             { 
                 const { title, description, completed, deadline } = req.body;
                  try 
                  { 
-                    const task = await Task.findById(req.params.id);
-                     if (!task) return res.status(404).json({ message: 'Task not found' });
-                     task.title = title || task.title; task.description = description 
-                     || task.description; task.completed = completed ?? task.completed; task.deadline = deadline 
-                     || task.deadline; const updatedTask = await task.save(); res.json(updatedTask); 
+                    const loan = await Loan.findById(req.params.id);
+                     if (!loan) return res.status(404).json({ message: 'Loan not found' });
+                     loan.title = title || loan.title; loan.description = description 
+                     || loan.description; loan.completed = completed ?? loan.completed; loan.deadline = deadline 
+                     || loan.deadline; const updatedLoan = await loan.save(); res.json(updatedLoan); 
                     } catch (error) 
                     { res.status(500).json({ message: error.message }); 
                 } 
             };
 
-            const deleteTask = async (req, res) => 
+            const deleteLoan = async (req, res) => 
                   { 
                     try{
-                         const task = await Task.findById(req.params.id);
-                            if (!task) return res.status(404).json({ message: 'Task not found' });
-                            await task.remove(); res.json({ message: 'Task deleted' });
+                         const loan = await Loan.findById(req.params.id);
+                            if (!loan) return res.status(404).json({ message: 'Loan not found' });
+                            await loan.remove(); res.json({ message: 'Loan deleted' });
                          } catch (error) 
                          { 
                             res.status(500).json({ message: error.message }); 
                         } 
-                    }; module.exports = { getTasks, addTask, updateTask, deleteTask };
+                    }; module.exports = { getLoans, addLoan, updateLoan, deleteLoan };
