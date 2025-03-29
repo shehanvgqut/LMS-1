@@ -1,10 +1,10 @@
 
 const mongoose = require('mongoose');
 
-const loanDetailsSchema = new mongoose.Schema({
+const loanSchema = new mongoose.Schema({
   loanId: { type: mongoose.Schema.Types.ObjectId, default: () => new mongoose.Types.ObjectId() },
-  borrowerName: { type: String, required: true },
-  borrowerAge: { type: Number, required: true },
+  borrowerName: { type: String, default: false },
+  borrowerAge: { type: Number, default: false },
   loanType: { type: String, required: true },
   principalAmount: { type: Number, required: true },
   interestRate: { type: Number, required: true },

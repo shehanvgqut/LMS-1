@@ -4,12 +4,12 @@ import axiosInstance from '../axiosConfig';
 const LoanList = ({ loans, setLoans, setEditingLoan }) => {
   const { user } = useAuth();
 
-  const handleDelete = async (loanId) => {
+  const handleDelete = async (loan_Id) => {
     try {
-      await axiosInstance.delete(`/api/loans/${loanId}`, {
+      await axiosInstance.delete(`/api/loans/${loan_Id}`, {
         headers: { Authorization: `Bearer ${user.token}` },
       });
-      setLoans(loans.filter((loan) => loan._id !== loanId));
+      setLoans(loans.filter((loan) => loan.loanId !== loan_Id));
     } catch (error) {
       alert('Failed to delete loan.');
     }
@@ -18,10 +18,11 @@ const LoanList = ({ loans, setLoans, setEditingLoan }) => {
   return (
     <div>
       {loans.map((loan) => (
-        <div key={loan._id} className="bg-gray-100 p-4 mb-4 rounded shadow">
-          <h2 className="font-bold">{loan.title}</h2>
-          <p>{loan.description}</p>
-          <p className="text-sm text-gray-500">Deadline: {new Date(loan.deadline).toLocaleDateString()}</p>
+        <div key={loan.loanId} className="bg-gray-100 p-4 mb-4 rounded shadow">
+          <h2 className="font-bold">{loan.loanType}</h2>
+          <p>{loan.borrowerName}</p>
+          <p>{loan.loanType}</p>
+          <p className="text-sm text-gray-500">Start date: {new Date(loan.loanStartDate).toLocaleDateString()}</p>
           <div className="mt-2">
             <button
               onClick={() => setEditingLoan(loan)}
@@ -30,7 +31,7 @@ const LoanList = ({ loans, setLoans, setEditingLoan }) => {
               Edit
             </button>
             <button
-              onClick={() => handleDelete(loan._id)}
+              onClick={() => handleDelete(loan.loanId)}
               className="bg-red-500 text-white px-4 py-2 rounded"
             >
               Delete

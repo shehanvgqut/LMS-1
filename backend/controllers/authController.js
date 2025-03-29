@@ -8,6 +8,7 @@ const generateToken = (id) => {
 };
 
 const registerUser = async (req, res) => {
+    console.log("registerUser");
     const { name, email, password } = req.body;
     try {
         const userExists = await User.findOne({ email });
@@ -21,6 +22,7 @@ const registerUser = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
+    console.log("loginUser");
     const { email, password } = req.body;
     try {
         const user = await User.findOne({ email });
