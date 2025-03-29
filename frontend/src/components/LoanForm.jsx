@@ -7,6 +7,8 @@ const LoanForm = ({ loans, setLoans, editingLoan, setEditingLoan }) => {
   const [formData, setFormData] = useState({
     loanType: '',
     principalAmount: '',
+    borrowerAge:'',
+    borrowerName:'',
     interestRate: '',
     termInMonths: '',
     loanStartDate: '',
@@ -20,6 +22,8 @@ const LoanForm = ({ loans, setLoans, editingLoan, setEditingLoan }) => {
       setFormData({
         loanType: editingLoan.loanType || '',
         principalAmount: editingLoan.principalAmount || '',
+        borrowerAge: editingLoan.borrowerAge || '',
+        borrowerName: editingLoan.borrowerName || '',
         interestRate: editingLoan.interestRate || '',
         termInMonths: editingLoan.termInMonths || '',
         loanStartDate: editingLoan.loanStartDate?.slice(0, 10) || '',
@@ -32,6 +36,8 @@ const LoanForm = ({ loans, setLoans, editingLoan, setEditingLoan }) => {
         loanType: '',
         principalAmount: '',
         interestRate: '',
+        borrowerAge:'',
+        borrowerName:'',
         termInMonths: '',
         loanStartDate: '',
         loanEndDate: '',
@@ -44,17 +50,19 @@ const LoanForm = ({ loans, setLoans, editingLoan, setEditingLoan }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+        console.log();
       const config = {
         headers: { Authorization: `Bearer ${user.token}` },
       };
 
       const payload = {
         ...formData,
-        borrowerId: user.id, // or user._id depending on your backend
+        //: user.id, // or user._id depending on your backend
       };
 
       if (editingLoan) {
-        const response = await axiosInstance.put(`/api/loans/${editingLoan._id}`, payload, config);
+        console.log();
+        const response = await axiosInstance.put(`/api/loans/${editingLoan.loanId}`, payload, config);
         setLoans(loans.map((loan) => (loan._id === response.data._id ? response.data : loan)));
       } else {
         const response = await axiosInstance.post('/api/loans', payload, config);
@@ -66,6 +74,8 @@ const LoanForm = ({ loans, setLoans, editingLoan, setEditingLoan }) => {
         loanType: '',
         principalAmount: '',
         interestRate: '',
+        borrowerAge:'',
+        borrowerName:'',
         termInMonths: '',
         loanStartDate: '',
         loanEndDate: '',
@@ -90,12 +100,30 @@ const LoanForm = ({ loans, setLoans, editingLoan, setEditingLoan }) => {
         required
         >
         <option value="">Select Loan Type</option>
-        <option value="Home">Home loan facility</option>
-        <option value="Auto">Vehicle loan facility </option>
-        <option value="Personal">Personal loan facility</option>
-        <option value="Education">Education loan facility</option>
-        <option value="Business">Business loan facility</option>
+        <option value="Home loan facility">Home loan facility</option>
+        <option value="Vehicle loan facility">Vehicle loan facility </option>
+        <option value="Personal loan facility">Personal loan facility</option>
+        <option value="Education loan facility">Education loan facility</option>
+        <option value="Business loan facility">Business loan facility</option>
       </select>
+
+        <input
+            type="text"
+            placeholder="Borrower Name"
+            value={formData.borrowerName}
+            onChange={(e) => setFormData({ ...formData, borrowerName: e.target.value })}
+            className="w-full mb-4 p-2 border rounded"
+            required
+        />
+
+        <input
+            type="number"
+            placeholder="Borrower Age"
+            value={formData.borrowerAge}
+            onChange={(e) => setFormData({ ...formData, borrowerAge: e.target.value })}
+            className="w-full mb-4 p-2 border rounded"
+            required
+        />
 
       <input
         type="number"

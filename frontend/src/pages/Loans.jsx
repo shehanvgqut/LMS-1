@@ -11,7 +11,9 @@ const Loans = () => {
 
   useEffect(() => {
     const fetchLoans = async () => {
+        console.log(user)
       try {
+        console.log("useEffect fetch Loans");
         const response = await axiosInstance.get('/api/loans', {
           headers: { Authorization: `Bearer ${user.token}` },
         });
