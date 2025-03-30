@@ -6,6 +6,7 @@ const LoanList = ({ loans, setLoans, setEditingLoan }) => {
 
   const handleDelete = async (loan_Id) => {
     try {
+      console.log("handleDelete"+loan_Id);
       await axiosInstance.delete(`/api/loans/${loan_Id}`, {
         headers: { Authorization: `Bearer ${user.token}` },
       });

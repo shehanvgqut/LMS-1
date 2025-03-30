@@ -15,7 +15,6 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/loans" element={<Loans />} />
-        <Route path="/loanList" element={<Loans />} />
       </Routes>
     </Router>
   );
