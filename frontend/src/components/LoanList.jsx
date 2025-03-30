@@ -23,6 +23,7 @@ const LoanList = ({ loans, setLoans, setEditingLoan }) => {
           <p>{loan.borrowerName}</p>
           <p>{loan.loanType}</p>
           <p className="text-sm text-gray-500">Start date: {new Date(loan.loanStartDate).toLocaleDateString()}</p>
+          <p className="text-sm text-gray-500">End date: {new Date(loan.loanEndDate).toLocaleDateString()}</p>
           <div className="mt-2">
             <button
               onClick={() => setEditingLoan(loan)}
