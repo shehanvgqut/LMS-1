@@ -7,7 +7,7 @@ const connectDB = require('../config/db');
 const mongoose = require('mongoose');
 const sinon = require('sinon');
 const Loan = require('../models/Loan');
-const { addLoan } = require('../controllers/LoanController');
+const { addLoan } = require('../controllers/loanController');
 const { expect } = chai;
 
 chai.use(chaiHttp);
@@ -90,4 +90,5 @@ describe('addLoan Function Test', () => {
     expect(res.status.calledWith(500)).to.be.true;
     expect(res.json.calledWithMatch({ message: 'DB error' })).to.be.true;
   });
+
 });
