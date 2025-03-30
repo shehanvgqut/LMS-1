@@ -80,6 +80,8 @@ const Loan = require('../models/Loan');
             const deleteLoan = async (req, res) => 
                   { 
                     try{
+                              console.log("deleteLoan"+loan_Id);
+                              debugger;
                          const loan = await Loan.findById(req.params.id);
                             if (!loan) return res.status(404).json({ message: 'Loan not found' });
                             await loan.remove(); res.json({ message: 'Loan deleted' });
