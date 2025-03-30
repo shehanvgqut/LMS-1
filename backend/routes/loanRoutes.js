@@ -1,6 +1,6 @@
 
 const express = require('express');
-const { getLoans, addLoan, updateLoan, deleteLoan } = require('../controllers/LoanController');
+const { getLoans, addLoan, updateLoan, deleteLoan } = require('../controllers/loanController');
 const { protect } = require('../middleware/authMiddleware');
 const router = express.Router();
 
