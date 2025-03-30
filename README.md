@@ -1,6 +1,7 @@
-1.  Clone the project - nothing much after that.
+1.  Clone the project - nothing much after that. use a code editor to open the cloned source code.
 2.  Install all the node modules - if needed delete the existing nodes module folder and re-install
 3.  Change axiosConfig - > baseURL to local
+
 4.  YML -
 5.  CI triggers only when the changes are commited to the main branch (typically when a PR is completed)
 6.  Set the environment too MONGO_URI
