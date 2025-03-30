@@ -90,4 +90,5 @@ describe('addLoan Function Test', () => {
     expect(res.status.calledWith(500)).to.be.true;
     expect(res.json.calledWithMatch({ message: 'DB error' })).to.be.true;
   });
+  
 });
